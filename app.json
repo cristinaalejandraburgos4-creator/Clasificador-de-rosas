@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "fdda4708-24d8-45f3-b0cd-362f8042e867"
+      }
+    },
+    "android": {
+      "package": "com.burgoscristina703.mobile"
+    }
+  }
+}

@@ -1,0 +1,187 @@
+import React, { useState } from 'react';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  FlatList, 
+  StyleSheet, 
+  ActivityIndicator, 
+  KeyboardAvoidingView, 
+  Platform 
+} from 'react-native';
+import { useRoseViewModel } from '../viewmodels/useRoseViewModel';
+
+export default function IndexScreen() {
+  const { resultado, cargando, error, predecirEspecie } = useRoseViewModel();
+  
+  // Estados locales para los inputs del formulario
+  const [caracteristica1, setCaracteristica1] = useState('');
+  const [caracteristica2, setCaracteristica2] = useState('');
+
+  const handleClasificar = () => {
+    if (!caracteristica1 || !caracteristica2) return;
+    
+    // Convertimos los valores a números y los enviamos al ViewModel
+    predecirEspecie({
+      feature1: parseFloat(caracteristica1),
+      feature2: parseFloat(caracteristica2)
+    });
+  };
+
+  // Preparamos los datos para renderizarlos con FlatList (cumpliendo rúbrica)
+  const dataList = resultado ? [resultado] : [];
+
+  return (
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+      style={styles.container}
+    >
+      <View style={styles.header}>
+        <Text style={styles.title}>Clasificador de Rosas 🌹</Text>
+        <Text style={styles.subtitle}>Modelo de IA con FastAPI y MVVM</Text>
+      </View>
+
+      <View style={styles.form}>
+        <TextInput
+          style={styles.input}
+          placeholder="Valor característica 1 (ej. Longitud)"
+          placeholderTextColor="#888"
+          keyboardType="numeric"
+          value={caracteristica1}
+          onChangeText={setCaracteristica1}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Valor característica 2 (ej. Ancho)"
+          placeholderTextColor="#888"
+          keyboardType="numeric"
+          value={caracteristica2}
+          onChangeText={setCaracteristica2}
+        />
+
+        <TouchableOpacity 
+          style={styles.button} 
+          onPress={handleClasificar}
+          disabled={cargando}
+        >
+          <Text style={styles.buttonText}>{cargando ? 'Analizando...' : 'Clasificar Rosa'}</Text>
+        </TouchableOpacity>
+      </View>
+
+      {cargando && (
+        <ActivityIndicator size="large" color="#e91e63" style={styles.loader} />
+      )}
+
+      {error && (
+        <Text style={styles.errorText}>{error}</Text>
+      )}
+
+      {/* Uso obligatorio de FlatList según la rúbrica */}
+      <FlatList
+        data={dataList}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Resultado de la Predicción:</Text>
+            <Text style={styles.cardText}>Especie: <Text style={styles.bold}>{item.especie || item.prediction}</Text></Text>
+            <Text style={styles.cardText}>Confianza: <Text style={styles.bold}>{item.confianza ? `${(item.confianza * 100).toFixed(1)}%` : 'N/A'}</Text></Text>
+          </View>
+        )}
+        contentContainerStyle={styles.listContainer}
+      />
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    padding: 20,
+    justifyContent: 'center',
+  },
+  header: {
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
+  },
+  form: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 15,
+    backgroundColor: '#fafafa',
+  },
+  button: {
+    backgroundColor: '#e91e63',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  loader: {
+    marginVertical: 20,
+  },
+  errorText: {
+    color: '#d32f2f',
+    textAlign: 'center',
+    marginVertical: 10,
+    fontWeight: '500',
+  },
+  listContainer: {
+    marginTop: 20,
+  },
+  card: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 8,
+    borderLeftWidth: 5,
+    borderLeftColor: '#e91e63',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 5,
+  },
+  cardText: {
+    fontSize: 14,
+    color: '#555',
+    marginTop: 2,
+  },
+  bold: {
+    fontWeight: 'bold',
+    color: '#000',
+  },
+});

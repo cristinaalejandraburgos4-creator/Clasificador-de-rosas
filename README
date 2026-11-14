@@ -1,0 +1,29 @@
+# 🌹 Clasificador de Rosas - Aplicación Móvil (MVVM)
+
+Aplicación móvil desarrollada desde cero para la clasificación inteligente de rosas, implementando una arquitectura limpia **MVVM** (Model-View-ViewModel) con **React Native**, **Expo Router** y conectada a un backend de servicios analíticos.
+
+---
+
+## 📱 Estructura y Arquitectura (MVVM)
+El proyecto está organizado bajo los principios de separación de responsabilidades:
+* **`src/models/`**: Contiene la lógica de datos y servicios de conexión (`roseService.js`).
+* **`src/viewmodels/`**: Administra el estado de la interfaz de usuario y la lógica de negocio (`useRoseViewModel.js`, componentes de listas, etc.).
+* **`src/views/`**: Pantallas principales de la interfaz (`index.js`, `result.js`, etc.) gestionadas con Expo Router.
+
+---
+
+## 🛠️ Tecnologías y Herramientas
+* **Framework Frontend**: [React Native](https://reactnative.dev/) con [Expo](https://expo.dev/) (Expo Router)
+* **Gestión de Compilación**: EAS Build (`eas.json` configurado para compilación de APKs en Android).
+* **Control de Versiones**: Git y GitHub.
+
+---
+
+## 🚀 Guía de Instalación y Ejecución Local
+
+Si deseas clonar y probar el proyecto localmente, sigue estos pasos:
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/cristinaalejandraburgos4-creator/Clasificador-Rosas-Mobile.git](https://github.com/cristinaalejandraburgos4-creator/Clasificador-Rosas-Mobile.git)
+   cd Clasificador-Rosas-Mobile/mobile

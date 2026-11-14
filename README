@@ -1,29 +1,24 @@
-# 🌹 Clasificador de Rosas - Aplicación Móvil (MVVM)
+🌹 Clasificador de Rosas - Aplicación Móvil (MVVM)
+
+Descripción del Proyecto:
 
 Aplicación móvil desarrollada desde cero para la clasificación inteligente de rosas, implementando una arquitectura limpia **MVVM** (Model-View-ViewModel) con **React Native**, **Expo Router** y conectada a un backend de servicios analíticos.
-
----
 
 ## 📱 Estructura y Arquitectura (MVVM)
 El proyecto está organizado bajo los principios de separación de responsabilidades:
 * **`src/models/`**: Contiene la lógica de datos y servicios de conexión (`roseService.js`).
 * **`src/viewmodels/`**: Administra el estado de la interfaz de usuario y la lógica de negocio (`useRoseViewModel.js`, componentes de listas, etc.).
-* **`src/views/`**: Pantallas principales de la interfaz (`index.js`, `result.js`, etc.) gestionadas con Expo Router.
-
----
+* **`src/views/`**: Pantallas principales de la interfaz (`index.js`, `result.js`, etc.) gestionadas con Expo Router
 
 ## 🛠️ Tecnologías y Herramientas
 * **Framework Frontend**: [React Native](https://reactnative.dev/) con [Expo](https://expo.dev/) (Expo Router)
 * **Gestión de Compilación**: EAS Build (`eas.json` configurado para compilación de APKs en Android).
 * **Control de Versiones**: Git y GitHub.
 
----
+3. Plantamiento del problema:
 
-## 🚀 Guía de Instalación y Ejecución Local
-
-Si deseas clonar y probar el proyecto localmente, sigue estos pasos:
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/cristinaalejandraburgos4-creator/Clasificador-Rosas-Mobile.git](https://github.com/cristinaalejandraburgos4-creator/Clasificador-Rosas-Mobile.git)
-   cd Clasificador-Rosas-Mobile/mobile
+n la actualidad, la horticultura y la industria florícola manejan una inmensa diversidad de especies y variedades de rosas (Rosa spp.). 
+Cada variedad posee características morfológicas únicas —como el color de los pétalos, la forma de la flor, el número de capas, el tipo 
+de borde o la presencia de espinas— que determinan su valor comercial, su uso ornamental o su resistencia a plagas.
+Sin embargo, la identificación manual de estas variedades suele depender de la experiencia de expertos botánicos o agricultores, lo que la convierte en una tarea lenta, subjetiva y propensa a errores humanos, especialmente cuando se trata de híbridos
+muy similares entre sí.
